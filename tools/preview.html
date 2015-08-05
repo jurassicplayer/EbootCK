@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<script type="text/javascript">
+<!--
+    function toggle(id) {
+        var e = document.getElementById(id);
+        var i = document.getElementById('icon0');
+        var s = document.getElementById('snd0');
+        if(e.style.display == 'block') {
+            e.style.display = 'none';
+        } else {
+            e.style.display = 'block';
+        }
+        if(id == "overlay" && e.style.display == 'block'){
+            i.style.borderRadius = '6px';
+            // i.style.boxShadow = '0px 2px 17px black';   Only for accuracy with PSX2PSP
+        } else if(id == "overlay" && e.style.display == 'none'){
+            i.style.borderRadius = '0px';
+            // i.style.boxShadow = 'none';   Only for accuracy with PSX2PSP 
+        } else if(id == "icon1" && e.style.display == 'block'){
+            e.play();
+            s.play();
+        } else if(id == "icon1" && e.style.display == 'none'){
+            e.pause();
+            s.pause();
+        }
+    }
+//-->
+</script>
+<style>
+#icon0 {
+    height:80px;
+    width:144px;
+    /* box-shadow:0px 2px 17px black;   Only for accuracy with PSX2PSP */
+    border-radius:6px;
+    overflow:hidden;
+    z-index:1;
+    position:absolute;
+    top:96px;
+    left:20px;
+}
+#overlay {
+    z-index:2;
+    position:absolute;
+    top:96px;
+    left:20px;
+    opacity:0.15;
+    height:80px;
+    width:144px;
+}
+#snd0 {
+    z-index:3;
+    display:none;
+}
+#icon1 {
+    z-index:3;
+    position:absolute;
+    display:none;
+    top:96px;
+    left:20px;
+    height:80px;
+    width:144px;
+}
+#pic0 {
+    z-index:1;
+    position:absolute;
+    top:87px;
+    left:165px;
+    height:180px;
+    width:310px;
+}
+#pic1 {
+    z-index:0;
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:272px;
+    width:480px;
+}
+#boot {
+    display: none;
+    z-index:3;
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:272px;
+    width:480px;
+}
+</style>
+</head><body oncontextmenu='return false;'>
+<video id="icon1" loop oncontextmenu="toggle('icon1')">
+    <source src="tmp/video.webm" type="video/webm" />
+</video>
+<audio id="snd0" loop>  
+   <source src="tmp/audio.ogg" type="audio/ogg"/>
+</audio>
+<img id="icon0" src="tmp/icon0.png" onerror="this.style.display='none'" onclick="toggle('overlay')" oncontextmenu="toggle('icon1')"/>
+<img id="overlay" src="overlay.png" onerror="this.style.display='none'" onclick="toggle('overlay')" oncontextmenu="toggle('icon1')"/>
+<img id="pic0" src="tmp/pic0.png" onerror="this.style.display='none'" onclick="toggle('boot')" oncontextmenu="javascript:location.reload(true);"/>
+<img id="pic1" src="tmp/pic1.png" onerror="this.style.display='none'" onclick="toggle('boot')" oncontextmenu="javascript:location.reload(true);"/>
+<img id="boot" src="tmp/boot.png" onerror="this.style.display='none'" onclick="toggle('boot')" oncontextmenu="javascript:location.reload(true);"/>
+
+</body></html>
