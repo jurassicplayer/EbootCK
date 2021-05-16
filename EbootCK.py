@@ -3,9 +3,9 @@
 
 #import time
 import sys, os, shutil, subprocess, re, binascii
-from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog, QDialog
+from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog
 import PyQt5.QtWidgets as QtWidgets
-from PyQt5 import QtCore, QtGui, uic, QtWebKit, QtWebKitWidgets
+from PyQt5 import QtCore, QtGui, uic, QtWebKitWidgets
 
 Ui_MainWindow, QtBaseClass = uic.loadUiType("main.ui")
 Ui_PreviewWindow, QtBaseClass = uic.loadUiType("preview.ui")
@@ -392,7 +392,7 @@ class Functions():
     def At3Convert(self, InFile, OutFile):
         TmpFile = self.tmp_folder+'/audio.wav'
         # Convert original to wav
-        command = '{0} -i {1} -y -c:a pcm_s16le -vn -ar 44100 {2}'.format(self.config['Settings']['ffmpeg'], str(InFile), str(TmpFile))
+        command = '{0} -i "{1}" -y -c:a pcm_s16le -vn -ar 44100 "{2}"'.format(self.config['Settings']['ffmpeg'], str(InFile), str(TmpFile))
         subprocess.call(command, shell=True, stdout=subprocess.PIPE)
         ## Convert wav to preview ogg
         ##command = '{0} -i {1} -y -vn -c:a libvorbis {2}'.format(self.config['Settings']['ffmpeg'], str(TmpFile), self.tmp_folder+'/audio.ogg')
@@ -420,21 +420,21 @@ class Functions():
             pmf_file = open(OutFile, "w+b")
             pmf_file.write(binascii.unhexlify(pmf_header)+f.read())
     def PVidConvert(self, InFile):
-        OutFile = self.tmp_folder+'/video.webm'
-        command = '{0} -i {1} -y -an -qmax 25 -threads 2 {2}'.format(self.config['Settings']['ffmpeg'], str(InFile), str(OutFile))
+        OutFile = self.tmp_folder+'/video.mp4'
+        command = '"{0}" -i "{1}" -y -an -qmax 25 -threads 2 "{2}"'.format(self.config['Settings']['ffmpeg'], str(InFile), str(OutFile))
         ffconvert = subprocess.call(command, shell=True)
     def PAudConvert(self, InFile):
         OutFile = self.tmp_folder+'/audio.ogg'
         TmpFile = self.tmp_folder+'/snd0.wav'
         # Convert At3 to wav
-        command = '{0} -repeat 1 -d {1} {2}'.format(self.config['Settings']['at3tool'], str(InFile), str(TmpFile))
+        command = '"{0}" -repeat 1 -d "{1}" "{2}"'.format(self.config['Settings']['at3tool'], str(InFile), str(TmpFile))
         if os.name == 'posix':
             ## Add at3tool wine wrapper
             command = 'wine {0}'.format(command)
         print(command)
         at3convert = subprocess.call(command, shell=True)
         # Convert wav to preview ogg
-        command = '{0} -i {1} -y -c:a libvorbis {2}'.format(self.config['Settings']['ffmpeg'], str(TmpFile), str(OutFile))
+        command = '"{0}" -i "{1}" -y -c:a libvorbis "{2}"'.format(self.config['Settings']['ffmpeg'], str(TmpFile), str(OutFile))
         ffconvert = subprocess.call(command, shell=True)
         os.remove(TmpFile)
     def get_mps_info(self, InFile):
