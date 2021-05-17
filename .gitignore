@@ -1,3 +1,5 @@
+.vscode
+ffmpeg-*
 *.exe
 *.png
 *.ogg
