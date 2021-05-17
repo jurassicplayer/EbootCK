@@ -3,7 +3,6 @@
 <meta http-equiv="Cache-control" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <script type="text/javascript">
-<!--
     function toggle(id) {
         var e = document.getElementById(id);
         var i = document.getElementById('icon0');
@@ -27,7 +26,6 @@
             s.pause();
         }
     }
-//-->
 </script>
 <style>
 #icon0 {
@@ -91,7 +89,7 @@
 </style>
 </head><body oncontextmenu='return false;'>
 <video id="icon1" loop oncontextmenu="toggle('icon1')">
-    <source src="tmp/video.mp4" type="video/mpeg" />
+    <source src="tmp/video.webm" type="video/webm"/>
 </video>
 <audio id="snd0" loop>  
    <source src="tmp/audio.ogg" type="audio/ogg"/>
@@ -101,5 +99,4 @@
 <img id="pic0" src="tmp/pic0.png" onerror="this.style.display='none'" onclick="toggle('boot')" oncontextmenu="javascript:location.reload(true);"/>
 <img id="pic1" src="tmp/pic1.png" onerror="this.style.display='none'" onclick="toggle('boot')" oncontextmenu="javascript:location.reload(true);"/>
 <img id="boot" src="tmp/boot.png" onerror="this.style.display='none'" onclick="toggle('boot')" oncontextmenu="javascript:location.reload(true);"/>
-
 </body></html>
