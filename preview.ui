@@ -48,7 +48,7 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QWebView" name="webView">
+    <widget class="QWebEngineView" name="webView">
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
      </property>
@@ -61,9 +61,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
+   <class>QWebEngineView</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header>QtWebEngineWidgets/QWebView</header>
   </customwidget>
  </customwidgets>
  <resources/>
